@@ -56,3 +56,35 @@ http://rdmo.readthedocs.io/en/latest/configuration/databases.html
 #         'NAME': '',
 #     }
 # }
+
+'''
+Cache, see also:
+http://rdmo.readthedocs.io/en/latest/configuration/cache.html
+'''
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#         'KEY_PREFIX': 'rdmo_default'
+#     },
+#     'api': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#         'KEY_PREFIX': 'rdmo_api'
+#     },
+# }
+
+'''
+E-Mail configuration, see also:
+http://rdmo.readthedocs.io/en/latest/configuration/email.html
+'''
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+# DEFAULT_FROM_EMAIL = ''
