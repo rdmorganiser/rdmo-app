@@ -1,13 +1,17 @@
+import os
+
 from rdmo.core.settings import *
 
 from .base import *
 from .local import *
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'vendor/')
+]
+
 # add static and templates from local.THEME_DIR to STATICFILES_DIRS and TEMPLATES
 try:
-    STATICFILES_DIRS = [
-        os.path.join(THEME_DIR, 'static/')
-    ]
+    STATICFILES_DIRS.append(os.path.join(THEME_DIR, 'static/'))
     TEMPLATES[0]['DIRS'].append(os.path.join(THEME_DIR, 'templates/'))
 except NameError:
     pass
