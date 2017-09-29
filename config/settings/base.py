@@ -1,5 +1,9 @@
 import os
 
+from django.utils.translation import ugettext_lazy as _
+
+from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS
+
 SITE_ID = 1
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

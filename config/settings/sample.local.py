@@ -24,6 +24,12 @@ The root url of your application, only needed when its not '/'
 # BASE_URL = '/path'
 
 '''
+Use content delievery networks for the static vendor files
+'''
+
+VENDOR_CDN = False
+
+'''
 The database connection to be used, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/databases.html
 '''
