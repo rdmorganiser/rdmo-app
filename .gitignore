@@ -5,6 +5,8 @@ media_root
 
 vendor
 
+log
+
 __pycache__
 *.pyc
 *~
