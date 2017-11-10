@@ -1,15 +1,16 @@
 '''
-A secret key for a particular Django installation. This is used to provide
-cryptographic signing, and should be set to a unique, unpredictable value.
-'''
-
-SECRET_KEY = ''
-
-'''
 Debug mode, don't use this in production
 '''
 
 DEBUG = False
+
+
+'''
+A secret key for a particular Django installation. This is used to provide
+cryptographic signing, and should be set to a unique, unpredictable value.
+'''
+
+SECRET_KEY = 'this is not a very secret key'
 
 '''
 The list of URLs und which this application available
@@ -24,38 +25,10 @@ The root url of your application, only needed when its not '/'
 # BASE_URL = '/path'
 
 '''
-Use content delievery networks for the static vendor files
-'''
-
-VENDOR_CDN = True
-
-'''
 Language code and time zone
 '''
 LANGUAGE_CODE = 'de-de'
 TIME_ZONE = 'Europe/Berlin'
-
-'''
-Theme, see also:
-http://rdmo.readthedocs.io/en/latest/configuration/themes.html
-'''
-
-# THEME_DIR = os.path.join(BASE_DIR, 'theme')
-
-'''
-Export Formats
-'''
-
-# EXPORT_FORMATS = (
-#     ('pdf', _('PDF')),
-#     ('rtf', _('Rich Text Format')),
-#     ('odt', _('Open Office')),
-#     ('docx', _('Microsoft Office')),
-#     ('html', _('HTML')),
-#     ('markdown', _('Markdown')),
-#     ('mediawiki', _('mediawiki')),
-#     ('tex', _('LaTeX'))
-# )
 
 '''
 The database connection to be used, see also:
@@ -90,6 +63,20 @@ http://rdmo.readthedocs.io/en/latest/configuration/databases.html
 #         'NAME': '',
 #     }
 # }
+
+'''
+E-Mail configuration, see also:
+http://rdmo.readthedocs.io/en/latest/configuration/email.html
+'''
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+# DEFAULT_FROM_EMAIL = ''
 
 '''
 Allauth configuration, see also:
@@ -171,6 +158,27 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.htm
 # LOGIN_URL = '/Shibboleth.sso/Login?target=/projects'
 # LOGOUT_URL = '/Shibboleth.sso/Logout'
 
+'''
+Theme, see also:
+http://rdmo.readthedocs.io/en/latest/configuration/themes.html
+'''
+
+# THEME_DIR = os.path.join(BASE_DIR, 'theme')
+
+'''
+Export Formats
+'''
+
+# EXPORT_FORMATS = (
+#     ('pdf', _('PDF')),
+#     ('rtf', _('Rich Text Format')),
+#     ('odt', _('Open Office')),
+#     ('docx', _('Microsoft Office')),
+#     ('html', _('HTML')),
+#     ('markdown', _('Markdown')),
+#     ('mediawiki', _('mediawiki')),
+#     ('tex', _('LaTeX'))
+# )
 
 '''
 Cache, see also:
@@ -189,20 +197,6 @@ http://rdmo.readthedocs.io/en/latest/configuration/cache.html
 #         'KEY_PREFIX': 'rdmo_api'
 #     },
 # }
-
-'''
-E-Mail configuration, see also:
-http://rdmo.readthedocs.io/en/latest/configuration/email.html
-'''
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = '25'
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False
-# DEFAULT_FROM_EMAIL = ''
 
 '''
 Logging configuration
