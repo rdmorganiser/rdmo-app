@@ -169,6 +169,7 @@ http://rdmo.readthedocs.io/en/latest/configuration/themes.html
 Export Formats
 '''
 
+# from django.utils.translation import ugettext_lazy as _
 # EXPORT_FORMATS = (
 #     ('pdf', _('PDF')),
 #     ('rtf', _('Rich Text Format')),
