@@ -1,3 +1,6 @@
+import os
+from . import BASE_DIR
+
 '''
 Debug mode, don't use this in production
 '''
