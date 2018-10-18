@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from rdmo.core.views import home, i18n_switcher
+from rdmo.core.views import home, about, i18n_switcher
 
 from rdmo.accounts.urls import accounts_patterns, accounts_patterns_api
 from rdmo.conditions.urls import conditions_patterns, conditions_patterns_internal, conditions_patterns_api
@@ -15,6 +15,7 @@ from rdmo.views.urls import views_patterns, views_patterns_internal, views_patte
 
 urlpatterns = [
     url(r'^$', home, name='home'),
+    url(r'^about/$', about, name='about'),
 
     # apps
     url(r'^account/', include(accounts_patterns)),
