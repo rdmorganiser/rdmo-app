@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from rdmo.core.views import home, about, i18n_switcher
+from rdmo.core.views import home, about, i18n_switcher, return_settings
 
 from rdmo.accounts.urls import accounts_patterns, accounts_patterns_api
 from rdmo.conditions.urls import conditions_patterns, conditions_patterns_internal, conditions_patterns_api
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^api/internal/questions/', include(questions_patterns_internal, namespace='internal-questions')),
     url(r'^api/internal/tasks/', include(tasks_patterns_internal, namespace='internal-tasks')),
     url(r'^api/internal/views/', include(views_patterns_internal, namespace='internal-views')),
+    url(r'^api/internal/settings/', return_settings, name='internal-settings'),
 
     # programmable API
     url(r'^api/v1/accounts/', include(accounts_patterns_api, namespace='api-v1-accounts')),
