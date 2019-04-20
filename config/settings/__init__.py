@@ -43,3 +43,10 @@ try:
     SESSION_COOKIE_PATH = BASE_URL + '/'
 except NameError:
     pass
+
+# enable browsable API in DEBUG mode
+if DEBUG:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
