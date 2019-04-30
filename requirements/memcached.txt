@@ -1,1 +1,1 @@
-python-memcached==1.58
+python-memcached>=1.58
