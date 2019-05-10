@@ -137,7 +137,7 @@ Shibboleth, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.html
 '''
 
-# from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS, MIDDLEWARE_CLASSES
+# from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS, MIDDLEWARE
 #
 # SHIBBOLETH = True
 # PROFILE_UPDATE = False
@@ -153,8 +153,8 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.htm
 #
 # AUTHENTICATION_BACKENDS.append('shibboleth.backends.ShibbolethRemoteUserBackend')
 #
-# MIDDLEWARE_CLASSES.insert(
-#     MIDDLEWARE_CLASSES.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
+# MIDDLEWARE.insert(
+#     MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
 #     'shibboleth.middleware.ShibbolethRemoteUserMiddleware'
 # )
 #
