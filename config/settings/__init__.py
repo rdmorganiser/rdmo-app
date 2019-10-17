@@ -1,5 +1,7 @@
 import os
 
+from rdmo.core.utils import sanitize_url
+
 SITE_ID = 1
 
 # set path-dependend settings
@@ -8,7 +10,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 FIXTURE_DIRS = (
-   os.path.join(BASE_DIR, 'fixtures'),
+    os.path.join(BASE_DIR, 'fixtures'),
 )
 
 # import default settings from rdmo
@@ -31,16 +33,16 @@ except NameError:
 
 # prepend the local.BASE_URL to the different URL settings
 try:
-    LOGIN_URL = BASE_URL + LOGIN_URL
-    LOGIN_REDIRECT_URL = BASE_URL + LOGIN_REDIRECT_URL
-    LOGOUT_URL = BASE_URL + LOGOUT_URL
-    ACCOUNT_LOGOUT_REDIRECT_URL = BASE_URL
-    MEDIA_URL = BASE_URL + MEDIA_URL
-    STATIC_URL = BASE_URL + STATIC_URL
+    LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)
+    LOGIN_REDIRECT_URL = sanitize_url(BASE_URL + LOGIN_REDIRECT_URL)
+    LOGOUT_URL = sanitize_url(BASE_URL + LOGOUT_URL)
+    ACCOUNT_LOGOUT_REDIRECT_URL = sanitize_url(BASE_URL)
+    MEDIA_URL = sanitize_url(BASE_URL + MEDIA_URL)
+    STATIC_URL = sanitize_url(BASE_URL + STATIC_URL)
 
-    CSRF_COOKIE_PATH = BASE_URL + '/'
-    LANGUAGE_COOKIE_PATH = BASE_URL + '/'
-    SESSION_COOKIE_PATH = BASE_URL + '/'
+    CSRF_COOKIE_PATH = sanitize_url(BASE_URL + '/')
+    LANGUAGE_COOKIE_PATH = sanitize_url(BASE_URL + '/')
+    SESSION_COOKIE_PATH = sanitize_url(BASE_URL + '/')
 except NameError:
     pass
 
