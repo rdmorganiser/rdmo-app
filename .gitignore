@@ -20,3 +20,4 @@ __pycache__/
 /themes
 /theme
 /plugins
+/.pytest_cache
