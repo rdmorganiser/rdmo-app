@@ -1,3 +1,4 @@
+import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
 
@@ -12,6 +13,7 @@ urlpatterns = [
     path('api/v1/', include('rdmo.core.urls.swagger')),
 
     path('admin/', admin.site.urls),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
 
 handler400 = 'rdmo.core.views.bad_request'
