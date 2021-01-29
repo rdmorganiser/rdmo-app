@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from rdmo.core.views import home, about
+from rdmo.core.views import about, home
 
 urlpatterns = [
     path('', home, name='home'),
@@ -13,3 +13,8 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 ]
+
+handler400 = 'rdmo.core.views.bad_request'
+handler403 = 'rdmo.core.views.forbidden'
+handler404 = 'rdmo.core.views.not_found'
+handler500 = 'rdmo.core.views.internal_server_error'
