@@ -24,13 +24,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'vendor/')
 ]
 
-# add static and templates from local.THEME_DIR to STATICFILES_DIRS and TEMPLATES
-try:
-    STATICFILES_DIRS.append(os.path.join(THEME_DIR, 'static/'))
-    TEMPLATES[0]['DIRS'].append(os.path.join(THEME_DIR, 'templates/'))
-except NameError:
-    pass
-
 # prepend the local.BASE_URL to the different URL settings
 try:
     LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)
