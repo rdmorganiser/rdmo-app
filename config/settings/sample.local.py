@@ -1,5 +1,5 @@
 import os
-from . import BASE_DIR
+from . import BASE_DIR, INSTALLED_APPS
 
 '''
 Debug mode, don't use this in production
@@ -86,7 +86,7 @@ Allauth configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 '''
 
-# from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS
+# from rdmo.core.settings import AUTHENTICATION_BACKENDS
 #
 # ACCOUNT = True
 # ACCOUNT_SIGNUP = True
@@ -137,7 +137,7 @@ Shibboleth, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.html
 '''
 
-# from rdmo.core.settings import INSTALLED_APPS, AUTHENTICATION_BACKENDS, MIDDLEWARE
+# from rdmo.core.settings import AUTHENTICATION_BACKENDS, MIDDLEWARE
 #
 # SHIBBOLETH = True
 # PROFILE_UPDATE = False
@@ -166,7 +166,7 @@ Theme, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/themes.html
 '''
 
-# THEME_DIR = os.path.join(BASE_DIR, 'theme')
+# INSTALLED_APPS = ['rdmo_theme'] + INSTALLED_APPS
 
 '''
 Export Formats
