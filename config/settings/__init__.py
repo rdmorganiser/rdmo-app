@@ -45,3 +45,12 @@ if DEBUG:
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     )
+
+# enable debug toolbar
+try:
+    if DEBUG and DEBUG_TOOLBAR:
+        INSTALLED_APPS += ['debug_toolbar']
+        MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+        INTERNAL_IPS = ['127.0.0.1']
+except NameError:
+    DEBUG_TOOLBAR = False
