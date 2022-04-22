@@ -48,7 +48,7 @@ if DEBUG:
 
 # enable debug toolbar
 try:
-    if DEBUG and DEBUG_TOOLBAR:
+    if DEBUG_TOOLBAR and DEBUG:
         INSTALLED_APPS += ['debug_toolbar']
         MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
         INTERNAL_IPS = ['127.0.0.1']
