@@ -91,6 +91,13 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 # ACCOUNT = True
 # ACCOUNT_SIGNUP = True
 # SOCIALACCOUNT = False
+# 
+# SOCIALACCOUNT_PROVIDERS = {
+#     'keycloak': {
+#         'KEYCLOAK_URL': '',
+#         'KEYCLOAK_REALM': ''
+#     },
+# }
 #
 # INSTALLED_APPS += [
 #     'allauth',
@@ -101,6 +108,7 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 #     'allauth.socialaccount.providers.google',
 #     'allauth.socialaccount.providers.orcid',
 #     'allauth.socialaccount.providers.twitter',
+#     'allauth.socialaccount.providers.keycloak',
 # ]
 #
 # AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBackend')
