@@ -12,12 +12,11 @@ __pycache__/
 /vendor
 /log
 /env
-/env2
-/env3
 /*.sqlite3
 /.coverage
+/.pytest_cache
 /htmlcov
 /themes
 /theme
 /plugins
-/.pytest_cache
+/scripts
