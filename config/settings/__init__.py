@@ -1,56 +1,136 @@
-import os
+from pathlib import Path
 
 from rdmo.core.utils import sanitize_url
 
-SITE_ID = 1
+BASE_DIR = Path(__file__).parent.parent.parent
+MEDIA_ROOT = BASE_DIR / 'media_root'
+STATIC_ROOT = BASE_DIR / 'static_root'
+STATICFILES_DIRS = [BASE_DIR / 'vendor']
 
-# set path-dependend settings
-PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.dirname(PROJECT_DIR)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-FIXTURE_DIRS = (
-    os.path.join(BASE_DIR, 'fixtures'),
-)
+BASE_URL = '/'
 
-# import default settings from rdmo
-from rdmo.core.settings import *
+LOG_LEVEL = 'INFO'
+LOG_PATH = None
+DEBUG_TOOLBAR = None
 
-# import local settings from local.py
-from .local import *
+# import all settings from rdmo/core/settings.py
+from rdmo.core.settings import *  # noqa: E402,F403
 
-# update STATICFILES_DIRS for the vendor directory
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'vendor/')
-]
+# import all settings from config/settings/base.py
+from .base import *  # noqa: E402,F403
 
-# prepend the local.BASE_URL to the different URL settings
-try:
-    LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)
-    LOGIN_REDIRECT_URL = sanitize_url(BASE_URL + LOGIN_REDIRECT_URL)
-    LOGOUT_URL = sanitize_url(BASE_URL + LOGOUT_URL)
-    ACCOUNT_LOGOUT_REDIRECT_URL = sanitize_url(BASE_URL)
-    MEDIA_URL = sanitize_url(BASE_URL + MEDIA_URL)
-    STATIC_URL = sanitize_url(BASE_URL + STATIC_URL)
+# import all settings from config/settings/local.py
+from .local import *  # noqa: E402,F403
 
-    CSRF_COOKIE_PATH = sanitize_url(BASE_URL + '/')
-    LANGUAGE_COOKIE_PATH = sanitize_url(BASE_URL + '/')
-    SESSION_COOKIE_PATH = sanitize_url(BASE_URL + '/')
-except NameError:
-    pass
+# prepend the BASE_URL to the different URL settings
+BASE_URL = sanitize_url(BASE_URL)  # noqa: F405
+LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)  # noqa: F405
+LOGIN_REDIRECT_URL = sanitize_url(BASE_URL + LOGIN_REDIRECT_URL)  # noqa: F405
+LOGOUT_URL = sanitize_url(BASE_URL + LOGOUT_URL)  # noqa: F405
+MEDIA_URL = sanitize_url(BASE_URL + MEDIA_URL)  # noqa: F405
+STATIC_URL = sanitize_url(BASE_URL + STATIC_URL)  # noqa: F405
 
-# enable browsable API in DEBUG mode
-if DEBUG:
-    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
+ACCOUNT_LOGOUT_REDIRECT_URL = BASE_URL
+CSRF_COOKIE_PATH = BASE_URL
+LANGUAGE_COOKIE_PATH = BASE_URL
+SESSION_COOKIE_PATH = BASE_URL
+
+if DEBUG:  # noqa: F405
+    # enable browsable API in DEBUG mode
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (  # noqa: F405
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     )
 
-# enable debug toolbar
-try:
-    if DEBUG_TOOLBAR and DEBUG:
-        INSTALLED_APPS += ['debug_toolbar']
-        MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+    # enable debug toolbar in DEBUG mode
+    if DEBUG_TOOLBAR:  # noqa: F405
+        INSTALLED_APPS += ['debug_toolbar']  # noqa: F405
+        MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE   # noqa: F405
         INTERNAL_IPS = ['127.0.0.1']
-except NameError:
-    DEBUG_TOOLBAR = False
+
+
+if LOG_PATH:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse'
+            },
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue'
+            }
+        },
+        'formatters': {
+            'default': {
+                'format': '[%(asctime)s] %(levelname)s: %(message)s'
+            },
+            'name': {
+                'format': '[%(asctime)s] %(levelname)s %(name)s: %(message)s'
+            }
+        },
+        'handlers': {
+            'mail_admins': {
+                'level': 'ERROR',
+                'filters': ['require_debug_false'],
+                'class': 'django.utils.log.AdminEmailHandler'
+            },
+            'error_log': {
+                'level': 'ERROR',
+                'class': 'logging.FileHandler',
+                'filename': LOG_PATH / 'error.log',
+                'formatter': 'default'
+            },
+            'ldap_log': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': LOG_PATH / 'ldap.log',
+                'formatter': 'name'
+            },
+            'rules_log': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': LOG_PATH / 'rules.log',
+                'formatter': 'name'
+            },
+            'rdmo_plugins_log': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': LOG_PATH / 'rdmo_plugins.log',
+                'formatter': 'name'
+            },
+            'rdmo_log': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': LOG_PATH / 'rdmo.log',
+                'formatter': 'name'
+            }
+        },
+        'loggers': {
+            'django.request': {
+                'handlers': ['mail_admins', 'error_log'],
+                'level': 'ERROR',
+                'propagate': True
+            },
+            'django_auth_ldap': {
+                'handlers': ['ldap_log'],
+                'level': LOG_LEVEL,
+                'propagate': True
+            },
+            'rules': {
+                'handlers': ['rules_log'],
+                'level': LOG_LEVEL,
+                'propagate': True,
+            },
+            'rdmo_plugins': {
+                'handlers': ['rdmo_plugins_log'],
+                'level': LOG_LEVEL,
+                'propagate': True
+            },
+            'rdmo': {
+                'handlers': ['rdmo_log'],
+                'level': LOG_LEVEL,
+                'propagate': True
+            }
+        }
+    }
