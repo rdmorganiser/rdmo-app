@@ -7,8 +7,7 @@ MEDIA_ROOT = BASE_DIR / 'media_root'
 STATIC_ROOT = BASE_DIR / 'static_root'
 STATICFILES_DIRS = [BASE_DIR / 'vendor']
 
-BASE_URL = '/'
-
+SITE_ID = 1
 LOG_LEVEL = 'INFO'
 LOG_PATH = None
 DEBUG_TOOLBAR = None
@@ -23,17 +22,18 @@ from .base import *  # noqa: E402,F403
 from .local import *  # noqa: E402,F403
 
 # prepend the BASE_URL to the different URL settings
-BASE_URL = sanitize_url(BASE_URL)  # noqa: F405
-LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)  # noqa: F405
-LOGIN_REDIRECT_URL = sanitize_url(BASE_URL + LOGIN_REDIRECT_URL)  # noqa: F405
-LOGOUT_URL = sanitize_url(BASE_URL + LOGOUT_URL)  # noqa: F405
-MEDIA_URL = sanitize_url(BASE_URL + MEDIA_URL)  # noqa: F405
-STATIC_URL = sanitize_url(BASE_URL + STATIC_URL)  # noqa: F405
+if BASE_URL:  # noqa: F405
+    BASE_URL = sanitize_url(BASE_URL)  # noqa: F405
+    LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)  # noqa: F405
+    LOGIN_REDIRECT_URL = sanitize_url(BASE_URL + LOGIN_REDIRECT_URL)  # noqa: F405
+    LOGOUT_URL = sanitize_url(BASE_URL + LOGOUT_URL)  # noqa: F405
+    MEDIA_URL = sanitize_url(BASE_URL + MEDIA_URL)  # noqa: F405
+    STATIC_URL = sanitize_url(BASE_URL + STATIC_URL)  # noqa: F405
 
-ACCOUNT_LOGOUT_REDIRECT_URL = BASE_URL
-CSRF_COOKIE_PATH = BASE_URL
-LANGUAGE_COOKIE_PATH = BASE_URL
-SESSION_COOKIE_PATH = BASE_URL
+    ACCOUNT_LOGOUT_REDIRECT_URL = BASE_URL
+    CSRF_COOKIE_PATH = BASE_URL
+    LANGUAGE_COOKIE_PATH = BASE_URL
+    SESSION_COOKIE_PATH = BASE_URL
 
 if DEBUG:  # noqa: F405
     # enable browsable API in DEBUG mode
@@ -47,7 +47,6 @@ if DEBUG:  # noqa: F405
         INSTALLED_APPS += ['debug_toolbar']  # noqa: F405
         MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE   # noqa: F405
         INTERNAL_IPS = ['127.0.0.1']
-
 
 if LOG_PATH:
     LOGGING = {
