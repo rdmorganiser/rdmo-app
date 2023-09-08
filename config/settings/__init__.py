@@ -11,6 +11,7 @@ SITE_ID = 1
 LOG_LEVEL = 'INFO'
 LOG_PATH = None
 DEBUG_TOOLBAR = None
+BASE_URL = None
 
 # import all settings from rdmo/core/settings.py
 from rdmo.core.settings import *  # noqa: E402,F403
