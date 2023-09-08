@@ -42,6 +42,9 @@ if DEBUG:  # noqa: F405
         'rest_framework.renderers.BrowsableAPIRenderer',
     )
 
+    # use same password hasher as for the rdmo testing fixtures
+    PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
+
     # enable debug toolbar in DEBUG mode
     if DEBUG_TOOLBAR:  # noqa: F405
         INSTALLED_APPS += ['debug_toolbar']  # noqa: F405
