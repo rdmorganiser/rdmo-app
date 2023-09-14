@@ -15,7 +15,7 @@ cryptographic signing, and should be set to a unique, unpredictable value.
 The list of URLs und which this application available
 '''
 
-# ALLOWED_HOSTS = ['localhost', 'ip6-localhost', '127.0.0.1', '[::1]']
+# ALLOWED_HOSTS += ['rdmo.example.com']
 
 '''
 The root url of your application, only needed when its not '/'
@@ -76,7 +76,6 @@ Allauth configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 '''
 
-# from rdmo.core.settings import AUTHENTICATION_BACKENDS
 # ACCOUNT = True
 # ACCOUNT_SIGNUP = True
 # SOCIALACCOUNT = False
@@ -101,7 +100,6 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/ldap.html
 
 # import ldap
 # from django_auth_ldap.config import LDAPSearch
-# from rdmo.core.settings import AUTHENTICATION_BACKENDS
 
 # PROFILE_UPDATE = False
 
@@ -125,8 +123,6 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/ldap.html
 Shibboleth, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.html
 '''
-
-# from rdmo.core.settings import AUTHENTICATION_BACKENDS, MIDDLEWARE
 
 # SHIBBOLETH = True
 # PROFILE_UPDATE = False
