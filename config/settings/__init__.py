@@ -28,3 +28,19 @@ if BASE_URL:
     CSRF_COOKIE_PATH = BASE_URL
     LANGUAGE_COOKIE_PATH = BASE_URL
     SESSION_COOKIE_PATH = BASE_URL
+
+# dev: use md5 hasher
+PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
+
+# dev: enable browsable api
+if DEBUG:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+
+# dev: enable debug toolbar
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS += ['debug_toolbar']
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware', *MIDDLEWARE]
+    INTERNAL_IPS = ['127.0.0.1']
