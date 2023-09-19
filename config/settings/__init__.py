@@ -2,18 +2,46 @@ from pathlib import Path
 
 from split_settings.tools import include, optional
 
+from django.core.exceptions import ImproperlyConfigured
+
 from rdmo.core.settings import *  # import all rdmo default settings
 from rdmo.core.utils import sanitize_url
+
+from os import environ
+
+ENV = environ.get('DJANGO_ENV') or 'production'
 
 BASE_DIR = Path(__file__).parent.parent.parent
 MEDIA_ROOT = BASE_DIR / 'media_root'
 STATIC_ROOT = BASE_DIR / 'static_root'
 STATICFILES_DIRS = [BASE_DIR / 'vendor']
 
+# First include the settings from local.py, this file is not under version control
 include(
-    optional('base.py'),
     optional('local.py')
 )
+include(
+    "components/cache.py",
+    "components/email.py",
+    "components/logging.py",
+    optional("components/export_import.py"),
+)
+# DEBUG can be set in local.py for example
+if DEBUG or ENV == 'development':
+    include(
+        "environments/development.py",
+    )
+
+# RDMO_AUTHENTICATION is imported from local.py
+AUTHENTICATION_OPTIONS = ("allauth", "ldap", "shibboleth")
+if not all([auth_option in AUTHENTICATION_OPTIONS for auth_option in RDMO_AUTHENTICATION]):
+    raise ImproperlyConfigured("RDMO_AUTHENTICATION must be a subset of {} and not\n\t {}".format(str(AUTHENTICATION_OPTIONS), str(RDMO_AUTHENTICATION)))
+
+for auth_option in RDMO_AUTHENTICATION:
+    # imports the settings from the chosen auth modules:
+    include(
+        "components/auth/{0}.py".format(auth_option)
+    )
 
 # prepend the BASE_URL to the different URL settings
 if BASE_URL:
