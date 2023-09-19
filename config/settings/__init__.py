@@ -1,13 +1,12 @@
+from os import environ
 from pathlib import Path
-
-from split_settings.tools import include, optional
 
 from django.core.exceptions import ImproperlyConfigured
 
+from split_settings.tools import include, optional
+
 from rdmo.core.settings import *  # import all rdmo default settings
 from rdmo.core.utils import sanitize_url
-
-from os import environ
 
 ENV = environ.get('DJANGO_ENV') or 'production'
 
@@ -17,9 +16,7 @@ STATIC_ROOT = BASE_DIR / 'static_root'
 STATICFILES_DIRS = [BASE_DIR / 'vendor']
 
 # First include the settings from local.py, this file is not under version control
-include(
-    optional('local.py')
-)
+include(optional('local.py'))
 include(
     "components/cache.py",
     "components/email.py",
@@ -34,14 +31,15 @@ if DEBUG or ENV == 'development':
 
 # RDMO_AUTHENTICATION is imported from local.py
 AUTHENTICATION_OPTIONS = ("allauth", "ldap", "shibboleth")
-if not all([auth_option in AUTHENTICATION_OPTIONS for auth_option in RDMO_AUTHENTICATION]):
-    raise ImproperlyConfigured("RDMO_AUTHENTICATION must be a subset of {} and not\n\t {}".format(str(AUTHENTICATION_OPTIONS), str(RDMO_AUTHENTICATION)))
+if not all(auth_option in AUTHENTICATION_OPTIONS for auth_option in RDMO_AUTHENTICATION):
+    _msg = "RDMO_AUTHENTICATION must be a subset of {} and not\n\t {}".format(
+        str(AUTHENTICATION_OPTIONS), str(RDMO_AUTHENTICATION)
+    )
+    raise ImproperlyConfigured(_msg)
 
 for auth_option in RDMO_AUTHENTICATION:
     # imports the settings from the chosen auth modules:
-    include(
-        "components/auth/{0}.py".format(auth_option)
-    )
+    include(f"components/auth/{auth_option}.py")
 
 # prepend the BASE_URL to the different URL settings
 if BASE_URL:

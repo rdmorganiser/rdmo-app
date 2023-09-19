@@ -64,4 +64,4 @@ Logging configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/logging.html
 '''
 LOG_LEVEL = 'INFO'  # or 'DEBUG' for the full logging experience
-LOG_PATH = BASE_DIR / 'log' # this directory needs to exist and be writable by the rdmo user
+LOG_PATH = BASE_DIR / 'log'  # this directory needs to exist and be writable by the rdmo user

@@ -1,5 +1,3 @@
-
-
 '''
 Debug mode, don't use this in production
 '''

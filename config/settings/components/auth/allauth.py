@@ -1,4 +1,3 @@
-
 '''
 Allauth configuration, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html

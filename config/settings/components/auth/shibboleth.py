@@ -1,4 +1,3 @@
-
 '''
 Shibboleth, see also:
 http://rdmo.readthedocs.io/en/latest/configuration/authentication/shibboleth.html
@@ -14,7 +13,7 @@ AUTHENTICATION_BACKENDS.append('shibboleth.backends.ShibbolethRemoteUserBackend'
 
 MIDDLEWARE.insert(
     MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
-    'shibboleth.middleware.ShibbolethRemoteUserMiddleware'
+    'shibboleth.middleware.ShibbolethRemoteUserMiddleware',
 )
 
 SHIBBOLETH_ATTRIBUTE_MAP = {
