@@ -16,7 +16,7 @@ include(
 )
 
 # prepend the BASE_URL to the different URL settings
-if BASE_URL:
+try:
     BASE_URL = sanitize_url(BASE_URL)
     LOGIN_URL = sanitize_url(BASE_URL + LOGIN_URL)
     LOGIN_REDIRECT_URL = sanitize_url(BASE_URL + LOGIN_REDIRECT_URL)
@@ -28,3 +28,5 @@ if BASE_URL:
     CSRF_COOKIE_PATH = BASE_URL
     LANGUAGE_COOKIE_PATH = BASE_URL
     SESSION_COOKIE_PATH = BASE_URL
+except NameError:
+    pass
