@@ -92,6 +92,7 @@ http://rdmo.readthedocs.io/en/latest/configuration/authentication/allauth.html
 # ]
 
 # AUTHENTICATION_BACKENDS.append('allauth.account.auth_backends.AuthenticationBackend')
+# MIDDLEWARE.append('allauth.account.middleware.AccountMiddleware')
 
 '''
 LDAP, see also:
