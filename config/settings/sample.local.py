@@ -44,7 +44,7 @@ http://rdmo.readthedocs.io/en/latest/configuration/databases.html
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': '',
 #         'USER': '',
 #         'PASSWORD': '',
