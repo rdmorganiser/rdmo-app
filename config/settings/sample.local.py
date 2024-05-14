@@ -15,7 +15,7 @@ cryptographic signing, and should be set to a unique, unpredictable value.
 The list of URLs und which this application available
 '''
 
-# ALLOWED_HOSTS += ['rdmo.example.com']
+# ALLOWED_HOSTS = ['rdmo.example.com']
 
 '''
 Enable usage of X-Forwarded-Host and X-Forwarded-Proto when using a reverse proxy
