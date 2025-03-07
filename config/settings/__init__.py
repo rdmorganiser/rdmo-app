@@ -10,7 +10,6 @@ BASE_URL = None
 BASE_DIR = Path(__file__).parent.parent.parent
 MEDIA_ROOT = BASE_DIR / 'media_root'
 STATIC_ROOT = BASE_DIR / 'static_root'
-STATICFILES_DIRS = [BASE_DIR / 'vendor']
 
 # the list of included files can be extended to accommodate a more complex setup
 include(
