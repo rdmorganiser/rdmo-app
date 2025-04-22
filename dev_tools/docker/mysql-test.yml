@@ -1,0 +1,23 @@
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rdmo
+    ports:
+      - "3306:3306"
+    command: >
+      bash -c "
+      docker-entrypoint.sh mysqld &
+      sleep 10 &&
+      mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS rdmo_local CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;' &&
+      wait
+      "
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
